@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The official documentation for QKings projects">
+    <title>Welcome to QKing's Documentation - QKings Documentation</title>
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/QKing-Official/QKing-Official.github.io/refs/heads/main/images/main.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --background: #ffffff;
+            --text: #1e293b;
+            --sidebar: #f8fafc;
+        }
+        
+        [data-theme="dark"] {
+            --primary: #3b82f6;
+            --secondary: #94a3b8;
+            --background: #0f172a;
+            --text: #e2e8f0;
+            --sidebar: #1e293b;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar);
+            padding: 2rem 1rem;
+            overflow-y: auto;
+            border-right: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+            position: fixed;
+            height: 100vh;
+            transition: background-color 0.3s ease;
+        }
+        
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .site-title a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .site-title a:hover {
+            opacity: 0.8;
+        }
+        
+        .site-logo {
+            height: 32px;
+            width: 32px;
+            object-fit: contain;
+        }
+        
+        [data-theme="light"] .site-logo.light-logo {
+            display: block;
+        }
+        
+        [data-theme="light"] .site-logo.dark-logo {
+            display: none;
+        }
+        
+        [data-theme="dark"] .site-logo.light-logo {
+            display: none;
+        }
+        
+        [data-theme="dark"] .site-logo.dark-logo {
+            display: block;
+        }
+        
+        .site-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .site-title a:hover {
+            opacity: 0.8;
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            width: 36px;
+            height: 36px;
+        }
+        
+        .theme-toggle:hover {
+            background: color-mix(in srgb, var(--primary) 15%, transparent);
+        }
+        
+        .theme-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        
+        [data-theme="light"] .theme-icon.light-icon {
+            display: block;
+        }
+        
+        [data-theme="light"] .theme-icon.dark-icon {
+            display: none;
+        }
+        
+        [data-theme="dark"] .theme-icon.light-icon {
+            display: none;
+        }
+        
+        [data-theme="dark"] .theme-icon.dark-icon {
+            display: block;
+        }
+        
+        .nav-category {
+            margin-bottom: 1.5rem;
+        }
+        
+        .nav-category-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.25rem;
+            color: var(--secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover {
+            background: color-mix(in srgb, var(--primary) 15%, transparent);
+            color: var(--primary);
+        }
+        
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .content {
+            flex: 1;
+            padding: 3rem;
+            margin-left: 280px;
+            max-width: 1200px;
+        }
+        
+        h1 { 
+            color: var(--primary); 
+            font-size: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        h2 { 
+            margin-top: 2.5rem; 
+            margin-bottom: 1rem;
+            font-size: 1.875rem;
+            color: var(--text);
+            font-weight: 600;
+            border-bottom: 2px solid color-mix(in srgb, var(--text) 15%, transparent);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 { 
+            margin-top: 1.5rem; 
+            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+        
+        h4 { 
+            margin-top: 1rem; 
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        p { 
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+        
+        code {
+            background: color-mix(in srgb, var(--text) 10%, transparent);
+            color: var(--primary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: color-mix(in srgb, var(--text) 95%, transparent);
+            color: var(--background);
+            padding: 1.25rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            line-height: 1.5;
+        }
+        
+        [data-theme="dark"] pre {
+            background: color-mix(in srgb, var(--background) 80%, black);
+            color: var(--text);
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .content {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="site-header">
+                <div class="site-title">
+                    <a href="/index.html">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMyNTYzZWIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNNCAxOS41di0xNUEyLjUgMi41IDAgMCAxIDYuNSAySDIwdjIwSDYuNWEyLjUgMi41IDAgMCAxIDAtNUgyMCIvPjwvc3ZnPg==" alt="Logo" class="site-logo light-logo">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMzYjgyZjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNNCAxOS41di0xNUEyLjUgMi41IDAgMCAxIDYuNSAySDIwdjIwSDYuNWEyLjUgMi41IDAgMCAxIDAtNUgyMCIvPjwvc3ZnPg==" alt="Logo" class="site-logo dark-logo">
+                        <span>QKings Documentation</span>
+                    </a>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI0Ii8+PHBhdGggZD0iTTEyIDJ2MiIvPjxwYXRoIGQ9Ik0xMiAyMHYyIi8+PHBhdGggZD0ibTQuOTMgNC45MyAxLjQxIDEuNDEiLz48cGF0aCBkPSJtMTcuNjYgMTcuNjYgMS40MSAxLjQxIi8+PHBhdGggZD0iTTIgMTJoMiIvPjxwYXRoIGQ9Ik0yMCAxMmgyIi8+PHBhdGggZD0ibTYuMzQgMTcuNjYtMS40MSAxLjQxIi8+PHBhdGggZD0ibTE5LjA3IDQuOTMtMS40MSAxLjQxIi8+PC9zdmc+" alt="Switch to dark theme" class="theme-icon light-icon">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmNTllMGIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgM2E2IDYgMCAwIDAgOSA5IDkgOSAwIDEgMS05LTlaIi8+PC9zdmc+" alt="Switch to light theme" class="theme-icon dark-icon">
+                </button>
+            </div>
+            <nav>
+                <div class="nav-category">
+<div class="nav-category-title">Paymenter CookieBanner</div>
+<a href="/Paymenter CookieBanner/1. Getting Started.html" class="nav-link">1. Getting Started</a>
+<a href="/Paymenter CookieBanner/2. Configuration.html" class="nav-link">2. Configuration</a>
+<a href="/Paymenter CookieBanner/3. Development and Intergration.html" class="nav-link">3. Development and Intergration</a>
+</div>
+<div class="nav-category">
+<div class="nav-category-title">Risotto</div>
+<a href="/Risotto/1. Getting Started.html" class="nav-link">1. Getting Started</a>
+<a href="/Risotto/2. Configuration.html" class="nav-link">2. Configuration</a>
+<a href="/Risotto/3. Building and Hosting.html" class="nav-link">3. Building and Hosting</a>
+</div>
+            </nav>
+        </aside>
+        <main class="content">
+            <h1>Welcome to QKing's Documentation</h1>
+<p>This is the official documentation for QKing's projects, made in the Risotto Documentation framework: https://github.com/QKing-Official/Risotto</p>
+<strong>My GitHub:</strong>  <a href="https://github.com/QKing-Official">https://github.com/QKing-Official</a>
+<h2>What You Can Find Here</h2>
+<p>You can find documentation for my projects, carefully written to help you understand how they work and how to use them effectively.  
+Each guide is designed to make it easier to integrate my projects into your own applications or systems.</p>
+<p>This documentation includes:</p>
+<ul>
+<li>Detailed installation and setup instructions  </li>
+<li>Integration examples and practical use cases  </li>
+<li>API references and code explanations  </li>
+<li>Tutorials for common workflows  </li>
+<li>Best practices and troubleshooting tips  </li>
+<li>Development and contribution guidelines  </li>
+</ul>
+        </main>
+    </div>
+    
+    <script>
+        // Theme management
+        function getPreferredTheme() {
+            const stored = localStorage.getItem('theme');
+            if (stored) return stored;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+        
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'light' ? 'dark' : 'light';
+            setTheme(next);
+        }
+        
+        // Initialize theme
+        setTheme(getPreferredTheme());
+    </script>
+</body>
+</html>

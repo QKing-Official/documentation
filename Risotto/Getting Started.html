@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The official documentation for QKings projects">
+    <title>Getting Started - QKings Documentation</title>
+    <link rel="icon" type="image/x-icon" href="https://qking.me/images/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --background: #ffffff;
+            --text: #1e293b;
+            --sidebar: #f8fafc;
+        }
+        
+        [data-theme="dark"] {
+            --primary: #3b82f6;
+            --secondary: #94a3b8;
+            --background: #0f172a;
+            --text: #e2e8f0;
+            --sidebar: #1e293b;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar);
+            padding: 2rem 1rem;
+            overflow-y: auto;
+            border-right: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+            position: fixed;
+            height: 100vh;
+            transition: background-color 0.3s ease;
+        }
+        
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .site-title a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .site-title a:hover {
+            opacity: 0.8;
+        }
+        
+        .site-logo {
+            height: 32px;
+            width: 32px;
+            object-fit: contain;
+        }
+        
+        [data-theme="light"] .site-logo.light-logo {
+            display: block;
+        }
+        
+        [data-theme="light"] .site-logo.dark-logo {
+            display: none;
+        }
+        
+        [data-theme="dark"] .site-logo.light-logo {
+            display: none;
+        }
+        
+        [data-theme="dark"] .site-logo.dark-logo {
+            display: block;
+        }
+        
+        .site-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .site-title a:hover {
+            opacity: 0.8;
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            width: 36px;
+            height: 36px;
+        }
+        
+        .theme-toggle:hover {
+            background: color-mix(in srgb, var(--primary) 15%, transparent);
+        }
+        
+        .theme-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        
+        [data-theme="light"] .theme-icon.light-icon {
+            display: block;
+        }
+        
+        [data-theme="light"] .theme-icon.dark-icon {
+            display: none;
+        }
+        
+        [data-theme="dark"] .theme-icon.light-icon {
+            display: none;
+        }
+        
+        [data-theme="dark"] .theme-icon.dark-icon {
+            display: block;
+        }
+        
+        .nav-category {
+            margin-bottom: 1.5rem;
+        }
+        
+        .nav-category-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.25rem;
+            color: var(--secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover {
+            background: color-mix(in srgb, var(--primary) 15%, transparent);
+            color: var(--primary);
+        }
+        
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .content {
+            flex: 1;
+            padding: 3rem;
+            margin-left: 280px;
+            max-width: 1200px;
+        }
+        
+        h1 { 
+            color: var(--primary); 
+            font-size: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        h2 { 
+            margin-top: 2.5rem; 
+            margin-bottom: 1rem;
+            font-size: 1.875rem;
+            color: var(--text);
+            font-weight: 600;
+            border-bottom: 2px solid color-mix(in srgb, var(--text) 15%, transparent);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 { 
+            margin-top: 1.5rem; 
+            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+        
+        h4 { 
+            margin-top: 1rem; 
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        p { 
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+        
+        code {
+            background: color-mix(in srgb, var(--text) 10%, transparent);
+            color: var(--primary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: color-mix(in srgb, var(--text) 95%, transparent);
+            color: var(--background);
+            padding: 1.25rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            line-height: 1.5;
+        }
+        
+        [data-theme="dark"] pre {
+            background: color-mix(in srgb, var(--background) 80%, black);
+            color: var(--text);
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .content {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="site-header">
+                <div class="site-title">
+                    <a href="/index.html">
+                        <img src="https://qking.me/images/light.png" alt="Logo" class="site-logo light-logo">
+                        <img src="https://qking.me/images/dark.png" alt="Logo" class="site-logo dark-logo">
+                        <span>QKings Documentation</span>
+                    </a>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <img src="https://qking.me/images/lightswitch.png" alt="Switch to dark theme" class="theme-icon light-icon">
+                    <img src="https://qking.me/images/darkswitch.png" alt="Switch to light theme" class="theme-icon dark-icon">
+                </button>
+            </div>
+            <nav>
+                <div class="nav-category">
+<div class="nav-category-title">Risotto</div>
+<a href="/Risotto/Configuration.html" class="nav-link">Configuration</a>
+<a href="/Risotto/Getting Started.html" class="nav-link active">Getting Started</a>
+</div>
+            </nav>
+        </aside>
+        <main class="content">
+            <h1>Getting Started</h1>
+<h2>1. Install Requirements</h2>
+Risotto uses only the Python standard library — <strong>no external dependencies required</strong>.  
+You just need <strong>Python 3.8+</strong> installed.
+<h2>2. Prepare Configuration</h2>
+<h3>Project Structure</h3>
+<pre><code>your-project/
+├── docs/
+│   ├── index.md
+│   ├── category1/
+│   │   ├── intro.md
+│   │   └── usage.md
+│   └── category2/
+│       └── guide.md
+├── example.config.risotto
+└── risotto.py
+</code></pre>
+<p>Copy the example configuration to your working config file:</p>
+<pre><code>cp example.config.risotto config.risotto
+</code></pre>
+<p>You can edit <code>config.risotto</code> to customize:
+<ul>
+<li>Site name and title  </li>
+<li>Description and favicon  </li>
+<li>Logo for light/dark themes  </li>
+<li>Theme colors  </li>
+<li>Output directory  </li>
+<li>Home page name  </li>
+</ul></p>
+
+        </main>
+    </div>
+    
+    <script>
+        // Theme management
+        function getPreferredTheme() {
+            const stored = localStorage.getItem('theme');
+            if (stored) return stored;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+        
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'light' ? 'dark' : 'light';
+            setTheme(next);
+        }
+        
+        // Initialize theme
+        setTheme(getPreferredTheme());
+    </script>
+</body>
+</html>
